@@ -11,8 +11,9 @@ Those OS versions are targets of back-deployments of Concurrency.
 
 ```swift
 Task { @MainActor () -> Void in
-  await withCheckedContinuation { c in
-    // here is on background thread.    
+  await withCheckedContinuation { c in    
+    // >= iOS 15 : on main-thread
+    // < iOS 15 : on background-thread
     c.resume()
   }
 }
