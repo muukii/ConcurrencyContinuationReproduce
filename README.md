@@ -15,6 +15,12 @@ Differences of Concurrency behaviors between Xcode 14.0 and 14.1
   - iOS 14: Runs on background (hops to different context)
   - iOS 13: Runs on background
 
+- Xcode 14.1 Release
+  - iOS 15+: Runs on main (inherited same context)
+  - iOS 14: Runs on background (hops to different context)
+  - iOS 13: Runs on background
+
+
 On Xcode 14.1
 
 **`withCheckedContinuation`'s body will run on background thread in case of starting from main-actor.**
