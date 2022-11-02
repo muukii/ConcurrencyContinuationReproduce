@@ -25,7 +25,13 @@ jobs:
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-14-5;
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-15-4;
       - name: Test
-        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}" | xcpretty
+        run: xcodebuild -scheme ConcurrencyContinuationReproduce test  -resultBundlePath results/Tests.xcresult -destination "${{ matrix.destination }}" | xcpretty
+
+      - uses: kishikawakatsumi/xcresulttool@v1
+        with:
+          path: |
+            results/Tests.xcresult
+        if: success() || failure()
 
   test-on-14-1:
     runs-on: macos-12
@@ -48,5 +54,11 @@ jobs:
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-13-7;
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-14-5;
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-15-4;      
-      - name: Test
-        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}" | xcpretty
+      - name: Test      
+        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -resultBundlePath results/Tests.xcresult -destination "${{ matrix.destination }}" | xcpretty
+        
+      - uses: kishikawakatsumi/xcresulttool@v1
+        with:
+          path: |
+            results/Tests.xcresult
+        if: success() || failure()        
