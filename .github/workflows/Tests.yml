@@ -5,13 +5,17 @@ on: [push]
 jobs:
   test:
     runs-on: macos-12
+    strategy:
+      matrix:
+        xcode: ["14.0", "14.1"]
+        destination: ["platform=iOS Simulator,name=iPhone 14,OS=16.1"]
     steps:
       - uses: maxim-lobanov/setup-xcode@v1.1
         with:
-          xcode-version: "14.1"
+          xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v2
-      - name:
-        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination 'platform=iOS Simulator,name=iPhone 8,OS=16.1'
+      - name: Test
+        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}"
 
       - uses: kishikawakatsumi/xcresulttool@v1
         with:
