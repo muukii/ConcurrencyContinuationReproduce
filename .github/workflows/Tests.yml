@@ -19,6 +19,11 @@ jobs:
         with:
           xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v2
+      - name: Create Simulators
+        run: |
+          xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-13-7;
+          xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-14-5;
+          xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-15-4;
       - name: Test
         run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}" | xcpretty
 
@@ -36,7 +41,12 @@ jobs:
     steps:
       - uses: maxim-lobanov/setup-xcode@v1.1
         with:
-          xcode-version: ${{ matrix.xcode }}
+          xcode-version: ${{ matrix.xcode }}          
       - uses: actions/checkout@v2
+      - name: Create Simulators
+        run: |
+          xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-13-7;
+          xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-14-5;
+          xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-15-4;      
       - name: Test
         run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}" | xcpretty
