@@ -20,13 +20,7 @@ jobs:
           xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v2
       - name: Test
-        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}"
-
-      - uses: kishikawakatsumi/xcresulttool@v1
-        with:
-          path: |
-            results/VergeTests.xcresult
-        if: success() || failure()
+        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}" | xcpretty
 
   test-on-14-1:
     runs-on: macos-12
@@ -45,10 +39,4 @@ jobs:
           xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v2
       - name: Test
-        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}"
-
-      - uses: kishikawakatsumi/xcresulttool@v1
-        with:
-          path: |
-            results/VergeTests.xcresult
-        if: success() || failure()
+        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}" | xcpretty
