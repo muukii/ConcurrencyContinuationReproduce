@@ -19,6 +19,7 @@ jobs:
         with:
           xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v2
+      - run: xcrun simctl list runtimes
       - name: Create Simulators
         run: |
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-13-7;
@@ -49,6 +50,7 @@ jobs:
         with:
           xcode-version: ${{ matrix.xcode }}          
       - uses: actions/checkout@v2
+      - run: xcrun simctl list runtimes      
       - name: Create Simulators
         run: |
           xcrun simctl create SIM com.apple.CoreSimulator.SimDeviceType.iPhone-8 com.apple.CoreSimulator.SimRuntime.iOS-13-7;
