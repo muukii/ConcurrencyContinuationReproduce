@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
   var body: some View {
@@ -20,34 +21,26 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct BookContiunation: View {
-
+  
   @State var text: String = ""
-
+  
   var body: some View {
-
+    
     Button("Run") {
-
+      
       Task { @MainActor () -> Void in
-        await withCheckedContinuation { c in
+        await withCheckedContinuation { @MainActor c in
           
-          let thread = Thread.current.description
-          
-          if Thread.isMainThread == false {
-            DispatchQueue.main.async {
-              text = thread
-            }
-          } else {
-            text = thread
-          }
+          UIView()
           
           c.resume()
         }
       }
-
+      
     }
-
+    
     Text(text)
-
+    
   }
-
+  
 }
