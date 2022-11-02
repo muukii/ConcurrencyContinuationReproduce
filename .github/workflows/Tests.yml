@@ -19,6 +19,10 @@ jobs:
         with:
           xcode-version: ${{ matrix.xcode }}
       - uses: actions/checkout@v2
+      - run: |
+          xcversion simulators --install='iOS 15.4'
+          xcversion simulators --install='iOS 14.5'
+          xcversion simulators --install='iOS 13.7'
       - run: xcrun simctl list runtimes
       - name: Create Simulators
         run: |
@@ -50,6 +54,10 @@ jobs:
         with:
           xcode-version: ${{ matrix.xcode }}          
       - uses: actions/checkout@v2
+      - run: |
+          xcversion simulators --install='iOS 15.4'
+          xcversion simulators --install='iOS 14.5'
+          xcversion simulators --install='iOS 13.7'      
       - run: xcrun simctl list runtimes      
       - name: Create Simulators
         run: |
