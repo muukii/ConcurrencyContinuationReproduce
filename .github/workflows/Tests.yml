@@ -3,13 +3,34 @@ name: CommitChecks
 on: [push]
 
 jobs:
-  test:
+  test-on-14:
     runs-on: macos-12
     strategy:
       fail-fast: false
       matrix:
-        xcode: ["14.0", "14.1"]
-        destination: ["platform=iOS Simulator,name=iPhone 14,OS=16.*"]
+        xcode: ["14.0"]
+        destination: ["platform=iOS Simulator,OS=16.0,name=iPhone 14"]
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1.1
+        with:
+          xcode-version: ${{ matrix.xcode }}
+      - uses: actions/checkout@v2
+      - name: Test
+        run: xcodebuild -scheme ConcurrencyContinuationReproduce test -destination "${{ matrix.destination }}"
+
+      - uses: kishikawakatsumi/xcresulttool@v1
+        with:
+          path: |
+            results/VergeTests.xcresult
+        if: success() || failure()
+
+  test-on-14-1:
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["14.1"]
+        destination: ['platform=iOS Simulator,OS=16.1,name=iPhone 14']
     steps:
       - uses: maxim-lobanov/setup-xcode@v1.1
         with:
