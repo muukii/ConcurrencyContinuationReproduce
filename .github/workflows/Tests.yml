@@ -9,7 +9,11 @@ jobs:
       fail-fast: false
       matrix:
         xcode: ["14.0"]
-        destination: ["platform=iOS Simulator,OS=16.0,name=iPhone 14"]
+        destination:
+          - "platform=iOS Simulator,OS=16.0,name=iPhone 14"
+          - 'platform=iOS Simulator,OS=15.4,name=iPhone 8'
+          - 'platform=iOS Simulator,OS=14.5,name=iPhone 8'
+          - 'platform=iOS Simulator,OS=13.7,name=iPhone 8'
     steps:
       - uses: maxim-lobanov/setup-xcode@v1.1
         with:
@@ -30,7 +34,11 @@ jobs:
       fail-fast: false
       matrix:
         xcode: ["14.1"]
-        destination: ['platform=iOS Simulator,OS=16.1,name=iPhone 14']
+        destination: 
+          - 'platform=iOS Simulator,OS=16.1,name=iPhone 14'
+          - 'platform=iOS Simulator,OS=15.4,name=iPhone 8'
+          - 'platform=iOS Simulator,OS=14.5,name=iPhone 8'
+          - 'platform=iOS Simulator,OS=13.7,name=iPhone 8'
     steps:
       - uses: maxim-lobanov/setup-xcode@v1.1
         with:
