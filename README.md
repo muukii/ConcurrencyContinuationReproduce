@@ -20,6 +20,9 @@ Differences of Concurrency behaviors between Xcode 14.0 and 14.1
   - iOS 14: Runs on background (hops to different context)
   - iOS 13: Runs on background
 
+- Xcode 14.2 (✅ Fixed)
+  - iOS 13+: Runs on main (inherited same context)
+
 
 On Xcode 14.1
 
